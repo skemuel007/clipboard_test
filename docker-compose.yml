@@ -1,5 +1,14 @@
 version: "3"
 services:
-  sqlite:
-    container_name: sqlite
-    image:
+  sqlite3:
+    container_name: sqlite3
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      - "./db/sqlite3:/root/db"
+    env_file:
+      - docker.env
+    ports:
+      - '9000:9000'
+    restart: unless-stopped

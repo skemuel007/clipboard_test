@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Dataset } from '../dataset.entity';
 import { DeleteResult, Repository, SelectQueryBuilder } from 'typeorm';
 import { CreateDatasetDto } from '../dto/create-dataset.dto';
+import { SalarySsResponseDto } from '../dto/salary-ss-response.dto';
 
 @Injectable()
 export class DatasetService {
@@ -20,12 +21,19 @@ export class DatasetService {
     return await this.dataSetRepository.save<Dataset>(newDataSet);
   }
 
-  async salarySummaryStatistics(): Promise<any> {
-    return await this.summaryStatisticsSQLQuery().getRawOne();
+  async salarySummaryStatistics(): Promise<SalarySsResponseDto> {
+    const salarySummaryStats =
+      await this.summaryStatisticsSQLQuery().getRawOne();
+    const summaryResponse: SalarySsResponseDto = {
+      ...salarySummaryStats,
+    };
+    return summaryResponse;
   }
 
-  async deleteDataSet(id: number): Promise<DeleteResult> {
-    return await this.dataSetRepository.delete(id);
+  async deleteDataSet(id: number): Promise<any> {
+    const deletedResponse = await this.dataSetRepository.delete(id);
+    if (deletedResponse.affected > 0) return deletedResponse;
+    else throw new HttpException('Record not found', HttpStatus.NOT_FOUND);
   }
 
   async getContractSalarySummaryStatistics(): Promise<any> {

@@ -1,27 +1,18 @@
-import {
-  Column,
-  CreateDateColumn,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '../common/entity/base.entity';
 
-export class Dataset {
-  @PrimaryGeneratedColumn()
-  id?: number;
+@Entity()
+export class Dataset extends BaseEntity {
   @Column()
   name: string;
   @Column()
   salary: number;
   @Column()
-  curency: string;
+  currency?: string;
   @Column()
   department: string;
-  @Column()
-  on_contract?: boolean;
-  @Column()
+  @Column('boolean', { default: false })
+  on_contract?: boolean = false;
+  @Column({ nullable: true })
   sub_department: string;
-  @CreateDateColumn()
-  created_at: string;
-  @UpdateDateColumn()
-  updated_at: string;
 }

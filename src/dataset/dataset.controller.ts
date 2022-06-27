@@ -1,11 +1,21 @@
-import { Controller, Delete, Get } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { DatasetService } from './service/dataset.service';
 import { Dataset } from './dataset.entity';
 import { DeleteResult } from 'typeorm';
+import { CreateDatasetDto } from './dto/create-dataset.dto';
+import { FindOneParamDto } from './dto/find-one-param.dto';
 
-@Controller('dataset')
+@Controller({
+  version: '1',
+  path: 'dataset',
+})
 export class DatasetController {
   constructor(private datasetService: DatasetService) {}
+
+  @Post()
+  async createDataSet(@Body() createDataset: CreateDatasetDto) {
+    return this.datasetService.createDataSet(createDataset);
+  }
 
   @Get()
   async GetAllDataSets(): Promise<Dataset[]> {
@@ -13,7 +23,7 @@ export class DatasetController {
   }
 
   @Delete(':id')
-  async removeDataset(id: string): Promise<DeleteResult> {
+  async removeDataset(@Param() { id }: FindOneParamDto): Promise<DeleteResult> {
     return await this.datasetService.deleteDataSet(Number(id));
   }
 
