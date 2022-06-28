@@ -1,18 +1,25 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { DatasetService } from './service/dataset.service';
 import { Dataset } from './dataset.entity';
 import { DeleteResult } from 'typeorm';
 import { CreateDatasetDto } from './dto/create-dataset.dto';
 import { FindOneParamDto } from './dto/find-one-param.dto';
+import JwtAuthenticationGuard from '../authentication/jwt-authentication.guard';
 
-@Controller({
-  version: '1',
-  path: 'dataset',
-})
+@Controller('dataset')
 export class DatasetController {
   constructor(private datasetService: DatasetService) {}
 
   @Post()
+  @UseGuards(JwtAuthenticationGuard)
   async createDataSet(@Body() createDataset: CreateDatasetDto) {
     return this.datasetService.createDataSet(createDataset);
   }

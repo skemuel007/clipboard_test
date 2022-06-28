@@ -3,8 +3,6 @@
 /node_modules
 /db
 
-docker.env
-
 # Logs
 logs
 *.log
