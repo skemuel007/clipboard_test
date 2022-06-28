@@ -1,4 +1,4 @@
-import { Dataset } from '../../dataset/dataset.entity';
+import { Dataset } from '../../dataset/entities/dataset.entity';
 
 export const datasets: Dataset[] = [
   {

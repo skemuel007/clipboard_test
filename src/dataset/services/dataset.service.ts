@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Dataset } from '../dataset.entity';
+import { Dataset } from '../entities/dataset.entity';
 import { DeleteResult, Repository, SelectQueryBuilder } from 'typeorm';
 import { CreateDatasetDto } from '../dto/create-dataset.dto';
 import { SalarySsResponseDto } from '../dto/salary-ss-response.dto';

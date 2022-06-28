@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Dataset } from '../../dataset/dataset.entity';
+import { Dataset } from '../../dataset/entities/dataset.entity';
 import { Repository } from 'typeorm';
 import { datasets } from './dataset_data';
 

@@ -5,12 +5,27 @@ services:
     build:
       target: prod
       context: .
+    env_file: .env
+    environment:
+      - SQLITE_DB=clipboardtestdb
+      - SQLITE_USER=sqlite
+      - SQLITE_PASSWORD=sqlite
+      - SQLITE_HOST=sqlite3
+      - SQLITE_PORT=9000
+      - PORT=3000
+      - JWT_SECRET=2jlFlMGE79jMPxGzgMwhbL9zXpbYcw
+      - JWT_EXPIRATION_TIME=1800
     volumes:
       - "./:/app"
+      - "/app/node_modules"
     ports:
       - "3000:3000"
+    expose:
+      - 3000
     links:
       - sqlite3
+    networks:
+      - app-network
 
   sqlite3:
     container_name: sqlite3
@@ -23,4 +38,12 @@ services:
       - docker.env
     ports:
       - '9000:9000'
+    expose:
+      - 9000
     restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

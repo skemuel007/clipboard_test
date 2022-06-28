@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import User from '../../user/user.entity';
+import User from '../../user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { authUsers } from './auth_data';
 import * as bcrypt from 'bcrypt';
@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthSeederService {
   /**
-   * Constructor of AuthSeeder service
+   * Constructor of AuthSeeder services
    * @param userRepository
    */
   constructor(

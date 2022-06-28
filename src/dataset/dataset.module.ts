@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { DatasetService } from './service/dataset.service';
-import { DatasetController } from './dataset.controller';
+import { DatasetService } from './services/dataset.service';
+import { DatasetController } from './controllers/dataset.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Dataset } from './dataset.entity';
+import { Dataset } from './entities/dataset.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Dataset])],

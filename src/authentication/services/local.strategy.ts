@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import User from '../user/user.entity';
+import User from '../../user/entities/user.entity';
 import { PassportStrategy } from '@nestjs/passport';
 import { AuthenticationService } from './authentication.service';
 import { Strategy } from 'passport-local';

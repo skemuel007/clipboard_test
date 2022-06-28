@@ -9,13 +9,13 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { AuthenticationService } from './authentication.service';
-import RegisterDto from './dto/register.dto';
-import { RequestWithUser } from './request-with-user.interface';
-import { LocalAuthenticationGuard } from './local-authentication.guard';
-import JwtAuthenticationGuard from './jwt-authentication.guard';
-import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
-import User from "../user/user.entity";
+import { AuthenticationService } from '../services/authentication.service';
+import RegisterDto from '../dto/register.dto';
+import { RequestWithUser } from '../models/request-with-user.interface';
+import { LocalAuthenticationGuard } from '../services/local-authentication.guard';
+import JwtAuthenticationGuard from '../services/jwt-authentication.guard';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import User from '../../user/entities/user.entity';
 
 @Controller('authentication')
 @ApiTags('authentication')
@@ -35,6 +35,7 @@ export class AuthenticationController {
     return this.authenticationService.register(registrationData);
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   @HttpCode(200)
   @UseGuards(LocalAuthenticationGuard)
@@ -50,7 +51,7 @@ export class AuthenticationController {
   })
   @ApiResponse({
     status: 400,
-    description: 'Bad request'
+    description: 'Bad request',
   })
   async logIn(@Req() request: RequestWithUser, @Res() response: Response) {
     const { user } = request;
@@ -71,7 +72,7 @@ export class AuthenticationController {
   }
 
   @UseGuards(JwtAuthenticationGuard)
-  @Get()
+  @Get('profile')
   authenticate(@Req() request: RequestWithUser) {
     const user = request.user;
     user.password = undefined;

@@ -7,14 +7,16 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { DatasetService } from './service/dataset.service';
-import { Dataset } from './dataset.entity';
+import { DatasetService } from '../services/dataset.service';
+import { Dataset } from '../entities/dataset.entity';
 import { DeleteResult } from 'typeorm';
-import { CreateDatasetDto } from './dto/create-dataset.dto';
-import { FindOneParamDto } from './dto/find-one-param.dto';
-import JwtAuthenticationGuard from '../authentication/jwt-authentication.guard';
+import { CreateDatasetDto } from '../dto/create-dataset.dto';
+import { FindOneParamDto } from '../dto/find-one-param.dto';
+import JwtAuthenticationGuard from '../../authentication/services/jwt-authentication.guard';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('dataset')
+@ApiTags('dataset')
 export class DatasetController {
   constructor(private datasetService: DatasetService) {}
 
