@@ -3,6 +3,8 @@
 /node_modules
 /db
 
+clipboardtestdb
+
 # Logs
 logs
 *.log

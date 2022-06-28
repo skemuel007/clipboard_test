@@ -1,7 +1,7 @@
 import { Logger, Module } from "@nestjs/common";
 import { DatasetSeederService } from './dataset-seeder.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Dataset } from '../../dataset/dataset.entity';
+import { Dataset } from '../../dataset/entities/dataset.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Dataset])],
