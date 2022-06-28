@@ -1,6 +1,9 @@
 node_modules/
+db/
+dist/
 logs/
 cache/
 .git/
 .idea/
 .vscode/
+docker.env.sample
